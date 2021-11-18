@@ -9,19 +9,24 @@ export const AddTransaction = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-
-        const newTransaction = {
-            id: Math.floor(Math.random() * 100000000),
-            text,
-            amount: amount   
+        if(text.trim()==="" || amount.trim() =="") {
+            alert("Required both filed");
+        } else {
+            const newTransaction = {
+                id: Math.floor(Math.random() * 100000000),
+                text,
+                amount: +amount   
+            }
+    
+            addTransaction(newTransaction);
         }
 
-        addTransaction(newTransaction);
+       
     }
     return (
         <>
             <h3>Add new transaction</h3>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={(e) => {onSubmit(e)}}>
                 <div className="form-control">
                     <label htmlFor="text">Text</label>
                     <input type="text" value={text} onChange={(e) => setText(e.target.value)} 
